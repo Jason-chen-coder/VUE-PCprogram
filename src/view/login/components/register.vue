@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="用户注册" :visible.sync="dialogFormVisible">
+  <el-dialog title="用户注册" :visible.sync="dialogFormVisible" id="registerbox">
     <el-form :model="form" ref="form" :rules="rules">
       <el-form-item label="昵称" prop="nickname" :label-width="formLabelWidth" required>
         <el-input v-model="form.nickname" autocomplete="off"></el-input>
@@ -108,11 +108,16 @@ export default {
   text-align: center;
 }
 .imgcode {
-  width: 160px;
+  width: 130px;
   height: 41px;
 
 }
 .imgbox{
   text-align: right;
+  height: 40px;
+}
+#registerbox{
+    width: 1400px;
+    margin: 0 auto;
 }
 </style>
