@@ -4,11 +4,21 @@ import App from './App.vue'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+//导入axios
+import axios from 'axios'
+//在Vue的原型中添加$axios
+Vue.prototype.$axios = axios
 //导入全局样式文件
 import "./style/index.css"
+
 Vue.config.productionTip = false
 import router from './router/index'
+//使用环境变量
+// window.console.log(process.env.VUE_APP_URL)
+//导入Vuex的store
+import store from "../src/store/index"
 new Vue({
   render: h => h(App),
-  router
+  router,
+  store
 }).$mount('#app')
