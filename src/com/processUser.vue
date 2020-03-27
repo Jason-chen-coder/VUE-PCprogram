@@ -28,15 +28,15 @@
       <el-form-item prop="phone" label="电话" :label-width="formLabelWidth">
         <el-input v-model="form.phone" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item prop="role_id" label="角色" placeholder="请选择角色" :label-width="formLabelWidth">
-        <el-select v-model="form.role_id" >
+      <el-form-item prop="role_id" label="角色" :label-width="formLabelWidth">
+        <el-select v-model="form.role_id" placeholder="请选择角色">
           <el-option label="管理员" :value="4"></el-option>
           <el-option label="老师" :value="3"></el-option>
           <el-option label="学生" :value="2"></el-option>
         </el-select>
       </el-form-item>
       <el-form-item prop="status" label="状态" :label-width="formLabelWidth">
-        <el-select v-model="form.status">
+        <el-select v-model="form.status" placeholder="请选择状态">
           <el-option label="禁用" :value="0"></el-option>
           <el-option label="启用" :value="1"></el-option>
         </el-select>
