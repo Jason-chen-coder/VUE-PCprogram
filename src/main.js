@@ -10,13 +10,15 @@ import axios from 'axios'
 Vue.prototype.$axios = axios
 //导入全局样式文件
 import "./style/index.css"
-
+//导入过滤器
+import "./filters/timefilters"
 Vue.config.productionTip = false
 import router from './router/index'
 //使用环境变量
 // window.console.log(process.env.VUE_APP_URL)
 //导入Vuex的store
 import store from "../src/store/index"
+
 new Vue({
   render: h => h(App),
   router,

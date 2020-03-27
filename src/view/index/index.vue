@@ -2,13 +2,12 @@
   <div class="indexbox">
     <el-container class="box">
       <!-- 头部 -->
-      <el-header class="header">
+      <el-header  class="header">
         <div class="left">
           <i class="el-icon-s-fold" @click="isCollapse=!isCollapse"></i>
           <img src="../../assets/indexlogo.png" alt />
           <span>黑马面面</span>
         </div>
-
         <div class="right">
           <img class="usericon" :src="imgUrl" alt />
           <span class="userbox">
@@ -19,7 +18,7 @@
         </div>
       </el-header>
       <el-container class="contentbox">
-        <el-aside style="width:''">
+        <el-aside  style="width:''">
           <el-menu
             :router="true"
             default-active="1"
@@ -104,7 +103,7 @@ export default {
           //向服务器发起退出系统请求
           logoutApi()
             .then(res => {
-              console.log(res);
+              // console.log(res);
               if (res.data.code == 200) {
                 //向服务器请求退出成功
                 //删除token,并路由跳转回登录页面
@@ -197,7 +196,6 @@ export default {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
-  line-height: 160px;
 }
 .indexbox,
 .box,

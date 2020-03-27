@@ -42,10 +42,10 @@ const router = new VueRouter({
             },
             children: [
                 { path: "chart", component: chart,meta:{title:"数据概览"} },
-                { path: "question", component: question,meta:{title:"用户列表"} },
-                { path: "subject", component: subject,meta:{title:"题库列表"} },
-                { path: "user", component: user ,meta:{title:"企业列表"}},
-                { path: "enterprise", component: enterprise,meta:{title:"学科列表"} },
+                { path: "question", component: question,meta:{title:"题库列表"} },
+                { path: "subject", component: subject,meta:{title:"学科列表"} },
+                { path: "user", component: user ,meta:{title:"用户列表"}},
+                { path: "enterprise", component: enterprise,meta:{title:"企业列表"} },
             ]
         },
         {
@@ -65,8 +65,8 @@ import {Message} from 'element-ui'
 //使用导航守卫
 //先试用前置守卫
 router.beforeEach((to, from, next) => {
-    console.log("from",from)
-    console.log("to",to)
+    // console.log("from",from)
+    // console.log("to",to)
     var  title = to.meta.title
        //调用登录页保存到store中的数据token
      // console.log(store.state.token)

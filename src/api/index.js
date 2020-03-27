@@ -19,7 +19,7 @@ export function logoutApi(){
             token:gettoken()
         }
     })
-}
+}0
 
 export function checkToken(token){
     return instance({

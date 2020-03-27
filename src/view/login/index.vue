@@ -147,7 +147,7 @@ export default {
                 // //登录成功之后将token保存到Vuex中
                 // this.$store.state.token = res.data.data.token
                 //登录成功之后要进行页面跳转,跳转到首页
-                window.localStorage.setItem("hmmm",res.data.data.token)
+                // window.localStorage.setItem("hmmm",res.data.data.token)
                 settoken(res.data.data.token);
                 this.$router.push("/index");
               } else if (res.data.code == 202) {
