@@ -21,15 +21,19 @@
         <el-aside  style="width:''">
           <el-menu
             :router="true"
-            default-active="1"
+            default-active="/index/chart"
             class="el-menu-vertical-demo"
             :collapse="isCollapse"
           >
-            <el-menu-item index="/index/chart">
-              <i class="el-icon-pie-chart"></i>
-              <span slot="title">数据概览</span>
-            </el-menu-item>
-            <el-menu-item index="/index/user">
+          <template v-for="(item, index) in child" >
+            <el-menu-item  v-if="item.meta.roles.includes($store.state.role)"  :key="index" :index="item.meta.fullpath">
+              <!-- class  类名使用一个filter来筛选，从而添加图标 -->
+              <i :class="item.meta.icon "></i>
+              <span slot="title">{{item.meta.title}}</span>
+            </el-menu-item>    
+          </template>
+          
+            <!-- <el-menu-item index="/index/user">
               <i class="el-icon-user"></i>
               <span slot="title">用户列表</span>
             </el-menu-item>
@@ -43,8 +47,8 @@
             </el-menu-item>
             <el-menu-item index="/index/subject">
               <i class="el-icon-notebook-2"></i>
-              <span slot="title">学科列表</span>
-            </el-menu-item>
+              <span slot="title">学科列表</span> -->
+            <!-- </el-menu-item> -->
           </el-menu>
         </el-aside>
         <el-container>
@@ -58,6 +62,7 @@
 </template>
 
 <script>
+import child from "../../router/childRouter"
 // import { getUserInfo } from "../../api/index";
 import { logoutApi } from "../../api/index";
 import { removetoken } from "../../utils/mytoken";
@@ -66,8 +71,14 @@ export default {
     return {
       isCollapse: false,
       userinfo: {},
-      imgUrl:this.$store.state.avatar//将store中保存的用户头像直接赋值
+      imgUrl:this.$store.state.avatar,//将store中保存的用户头像直接赋值
+      child:child
     };
+  },
+  mounted() {
+    //当首页的dom加载完之后直接进行子页面跳转
+    this.$router.push("/index/chart")
+    
   },
   // created() {
   //   // //进入页面先检查tokn是否为空

@@ -72,6 +72,7 @@ var validatephone = (rule, value, callback) => {
 import register from "./components/register";
 import { loginapi } from "../../api/login";
 import { settoken } from "../../utils/mytoken";
+import {getUserInfo} from "../../api/index"
 export default {
   data() {
     return {
@@ -136,20 +137,18 @@ export default {
             code: this.form.logincode
           })
             .then(res => {
-              console.log(
-                this.form.phone,
-                this.form.password,
-                this.form.logincode
-              );
               if (res.data.code == 200) {
                 console.log(res);
-                this.$message.success("登陆成功");
-                // //登录成功之后将token保存到Vuex中
-                // this.$store.state.token = res.data.data.token
-                //登录成功之后要进行页面跳转,跳转到首页
-                // window.localStorage.setItem("hmmm",res.data.data.token)
                 settoken(res.data.data.token);
-                this.$router.push("/index");
+                getUserInfo().then(res=>{
+                  if(res.data.code===200&&res.data.data.status===1){
+                    this.$message.success("登陆成功");
+                    this.$router.push("/index");
+                  }else if(res.data.code===200&&res.data.data.status===0){
+                    this.$message.error("该用户已被管理员禁用，请联系管理员");
+                  }
+                })
+            
               } else if (res.data.code == 202) {
                 console.log(res);
                 this.$message.error("登录账号或者密码错误");

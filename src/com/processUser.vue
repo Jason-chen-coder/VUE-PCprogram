@@ -19,9 +19,9 @@
       <el-form-item prop="username" label="用户名" :label-width="formLabelWidth">
         <el-input v-model="form.username" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item  v-if="!Isedit" prop="password" label="密码" :label-width="formLabelWidth">
+      <!-- <el-form-item  v-if="!Isedit" prop="password" label="密码" :label-width="formLabelWidth">
         <el-input v-model="form.password" autocomplete="off"></el-input>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item prop="email" label="邮箱" :label-width="formLabelWidth">
         <el-input v-model="form.email" autocomplete="off"></el-input>
       </el-form-item>
@@ -54,6 +54,7 @@
 
 <script>
 import {addUserApi,editUserApi} from "../api/user"
+import { phonecheck, emailcheck } from "@/utils/mycheck";
 export default {
   data() {
     return {
@@ -65,7 +66,7 @@ export default {
         phone: "",
         email: "",
         avatar: "",
-        password: "",
+        // password: "",
         remark: "",
         status: "",
         role_id: "",
@@ -81,8 +82,12 @@ export default {
         password: [
           { required: true, message: "密码不能为空", trigger: "blur" }
         ],
-        email: [{ required: true, message: "邮箱不能为空", trigger: "blur" }],
-        phone: [{ required: true, message: "电话不能为空", trigger: "blur" }],
+        email: [
+          { required: true, message: "邮箱不能为空", trigger: "blur" },
+          {validator:emailcheck ,triiger:"blur"}
+        ],
+        phone: [{ required: true, message: "电话不能为空", trigger: "blur" },
+        {validator:phonecheck,triiger:"blur"}],
         role_id: [{ required: true, message: "角色为必选", trigger: "blur" }]
       }
     };
@@ -109,6 +114,7 @@ export default {
           addUserApi(this.form).then(res=>{
               console.log(res)
               if(res.data.code===200){
+                 this.$message.success("用户创建成功，默认密码为:88888888")
                   //调用父组件方法刷新列表
                   this.$parent.getUserList()
                   //情况表单
@@ -133,7 +139,7 @@ export default {
           } else {
             //当前为新增模式
             console.log("当前为新增模式");
-            console.log(this.form)
+            console.log("注册用户信息为:",this.form)
             this.addUser()
           }
         } else {
@@ -145,11 +151,11 @@ export default {
     finishwork() {
       this.$refs.form.resetFields();
     //   清空form信息
-      for (const key in this.form) {
-        this.form[key] = "";
-      }
+      // for (const key in this.form) {
+      //   this.form[key] = "";
+      // }
       this.dialogFormVisible = false;
-      this.imageUrl=""
+      this.imageUrl=" "
     },
     cancel() {
       //点击取消,清除表单内容

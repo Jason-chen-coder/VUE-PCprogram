@@ -18,7 +18,16 @@ import router from './router/index'
 // window.console.log(process.env.VUE_APP_URL)
 //导入Vuex的store
 import store from "../src/store/index"
-
+//导入vue-quill-editor
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
+import 'quill/dist/quill.bubble.css' // for bubble theme
+Vue.use(VueQuillEditor)
+//使用echarts
+// 引入echarts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts
 new Vue({
   render: h => h(App),
   router,

@@ -64,8 +64,8 @@
               type="text"
               size="small"
             >{{scope.row.status===0 ? '启用':'禁用'}}</el-button>
-            <el-button type="text" @click="editUser(scope.row)" size="small">编辑</el-button>
-            <el-button type="text" @click="removeUser(scope.row)" size="small">删除</el-button>
+            <el-button type="text" @click="editUser(scope.row)" v-if='["管理员","老师"].includes($store.state.role)' size="small">编辑</el-button>
+            <el-button type="text" @click="removeUser(scope.row)"  v-if="$store.state.role=='管理员'" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -113,27 +113,43 @@ export default {
   },
   methods: {
     addUser() {
+      //  this.$nextTick(()=>{
+      //     var formobj=this.$refs.processUser.form
+      //   for (const key in formobj) {
+      //     formobj[key]=""
+      //   }
+      //   this.$refs.processUser.$refs.form.resetFields()
+      //  })
+
       this.$refs.processUser.Isedit = false;
-      // 问题原因:this.$refs.processUser.$refs.form.resetFields()的作用是将表单内容重置回初始值(初始值就是form对象内的属性值),这个方法并不会清除form里面的属性值,所以你点击新增时 表单的内容还是显示form对象属性当前的值(即你上次点击编辑操作在form留下的属性值);
-      //解决办法:我们可以使用在父组件直接使用 this.$refs.processUser.form={},虽然清空了form对象里的属性和属性值,但当我们在子组件输入内容后由于双向绑定监听器就会触发事件 form对象就会添加上对应绑定的属性,且属性值就为你输入的内容;
-      //但是有一个疑问就是我在新增页面点击确定按钮时在发起新增用户axios申请前我输出了this.form,里面全都是undefined,但是新增结果是正常的
       this.$refs.processUser.dialogFormVisible = true;
-      // 将子组件的fom表单内容清空
-      // this.$refs.processUser.form={}
-      this.$refs.processUser.imageUrl=""
+      //如果上一次点击了编辑,这一次就要清除内容
+      // if (this.$refs.processUser.form.id) {
+        this.$nextTick(()=>{
+          this.$refs.processUser.$refs.form.resetFields();
+        })
+      // }
+
+      this.$refs.processUser.imageUrl = "";
+      //   // 将子组件的fom表单内容清空
+      //   // this.$refs.processUser.form={}
+      //   this.$refs.processUser.imageUrl=""
     },
     editUser(row) {
       console.log(row);
-      if (row.id !== this.$refs.processUser.form.id) {
-        if(row.avatar){
-            this.$refs.processUser.imageUrl=process.env.VUE_APP_URL+'/'+row.avatar
-        }else{
-          this.$refs.processUser.imageUrl=""
-        }
-        this.$refs.processUser.form = JSON.parse(JSON.stringify(row));
-      }
       this.$refs.processUser.Isedit = true;
       this.$refs.processUser.dialogFormVisible = true;
+      if (row.id !== this.$refs.processUser.form.id) {
+        this.$nextTick(() => {
+          this.$refs.processUser.form = JSON.parse(JSON.stringify(row));
+          if (row.avatar) {
+            this.$refs.processUser.imageUrl =
+              process.env.VUE_APP_URL + "/" + row.avatar;
+          } else {
+            this.$refs.processUser.imageUrl = "";
+          }
+        });
+      }
     },
     removeUser(row) {
       this.$confirm("此操作将永久删除该用户, 是否继续?", "提示", {
@@ -246,9 +262,9 @@ export default {
   /* line-height: 100%; */
   padding-top: 20px;
 }
-.userimg{
-display:inline-block ;
-width:100px ;
-height:100px;
+.userimg {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
 }
 </style>

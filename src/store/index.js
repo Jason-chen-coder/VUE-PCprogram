@@ -7,12 +7,15 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         username:"",
-        avatar:""
+        avatar:"",
+        role:""
     },
     mutations:{
         changeInfo(state,userinfo){
+            
             state.username = userinfo.username
             state.avatar =process.env.VUE_APP_URL + "/"+ userinfo.avatar
+            state.role = userinfo.role
         }
     }
 })
