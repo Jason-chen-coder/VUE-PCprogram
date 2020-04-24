@@ -87,7 +87,7 @@
     </el-card>
     <!-- <addDialog ref="addDialog"></addDialog>
     <editDialog ref="editDialog" />-->
-    <processEnt ref="processEnt" />>
+    <processEnt ref="processEnt" />
   </div>
 </template>
 

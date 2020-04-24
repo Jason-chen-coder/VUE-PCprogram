@@ -1,36 +1,52 @@
-# VUE-PC端后台管理系统
+# VUE-PC 端后台管理系统
 
 ## 安装依赖包
+
 ```
 npm install
 ```
 
 ### 运行项目
+
 ```
 npm run serve
 ```
 
 ### Compiles and minifies for production
+
 ```
 npm run build
 ```
 
 ### Lints and fixes files
+
 ```
 npm run lint
 ```
 
 项目概况:
 
-![](./mdimg/Snipaste_2020-04-02_16-55-30.png)
+**登录界面**：
 
-![Snipaste_2020-04-02_16-58-28](./mdimg/Snipaste_2020-04-02_16-58-28.png)
+![loginpng](C:\Black horse\VUE-PC端项目\heimamm\showimages\loginpng.png)
 
-![Snipaste_2020-04-02_16-58-39](./mdimg/Snipaste_2020-04-02_16-58-39.png)
+**首页**
+![index](C:\Black horse\VUE-PC端项目\heimamm\showimages\index.png)
 
-![Snipaste_2020-04-02_16-58-45](./mdimg/Snipaste_2020-04-02_16-58-45.png)
+**科目![subject](C:\Black horse\VUE-PC端项目\heimamm\showimages\subject.png)**
 
-![Snipaste_2020-04-02_16-59-10](./mdimg/Snipaste_2020-04-02_16-59-10.png)
+**企业**
+![enterprise](C:\Black horse\VUE-PC端项目\heimamm\showimages\enterprise.png)
 
-![Snipaste_2020-04-02_16-59-15](./mdimg/Snipaste_2020-04-02_16-59-15.png)
+**用户管理**
+
+![users](C:\Black horse\VUE-PC端项目\heimamm\showimages\users.png)
+
+**新增用户**
+
+![newuser](C:\Black horse\VUE-PC端项目\heimamm\showimages\newuser.png)
+
+**修改用户**![edituser](C:\Black horse\VUE-PC端项目\heimamm\showimages\edituser.png)
+
+**题目列表**![questions](C:\Black horse\VUE-PC端项目\heimamm\showimages\questions.png)
 

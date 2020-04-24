@@ -3,7 +3,7 @@
   <!-- :hide-required-asterisk="false"是否隐藏红色星星标识 -->
   <el-dialog class="Dialog" :title="Isedit? '修改用户':'新增用户'" :visible.sync="dialogFormVisible">
     <el-form :rules="rules" ref="form" :model="form">
-      <el-form-item prop="avatar" label="头像" :label-width="formLabelWidth">
+      <el-form-item class="changeedituser" prop="avatar" label="头像" :label-width="formLabelWidth">
         <el-upload
           class="avatar-uploader"
           :action="uploadUrl"
@@ -21,7 +21,7 @@
       </el-form-item>
       <!-- <el-form-item  v-if="!Isedit" prop="password" label="密码" :label-width="formLabelWidth">
         <el-input v-model="form.password" autocomplete="off"></el-input>
-      </el-form-item> -->
+      </el-form-item>-->
       <el-form-item prop="email" label="邮箱" :label-width="formLabelWidth">
         <el-input v-model="form.email" autocomplete="off"></el-input>
       </el-form-item>
@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import {addUserApi,editUserApi} from "../api/user"
+import { addUserApi, editUserApi } from "../api/user"
 import { phonecheck, emailcheck } from "@/utils/mycheck";
 export default {
-  data() {
+  data () {
     return {
       imageUrl: "",
       uploadUrl: process.env.VUE_APP_URL + "/uploads",
@@ -84,50 +84,50 @@ export default {
         ],
         email: [
           { required: true, message: "邮箱不能为空", trigger: "blur" },
-          {validator:emailcheck ,triiger:"blur"}
+          { validator: emailcheck, triiger: "blur" }
         ],
         phone: [{ required: true, message: "电话不能为空", trigger: "blur" },
-        {validator:phonecheck,triiger:"blur"}],
+        { validator: phonecheck, triiger: "blur" }],
         role_id: [{ required: true, message: "角色为必选", trigger: "blur" }]
       }
     };
   },
   methods: {
-      editUser(){ 
-          editUserApi(this.form).then(res=>{
-              console.log(res)
-              if(res.data.code===200){
-                  this.$message.success("编辑用户成功");
-                  //调用父组件方法刷新列表
-                  this.$parent.getUserList()
-                  //情况表单
-                  this.finishwork()
-              }
-          }).catch(error=>{
-              console.log("编辑失败")
-              console.log(error)
-          })
-      },
-      addUser(){
-          window.console.log("开始新增")
-          window.console.log(this.form)
-          addUserApi(this.form).then(res=>{
-              console.log(res)
-              if(res.data.code===200){
-                 this.$message.success("用户创建成功，默认密码为:88888888")
-                  //调用父组件方法刷新列表
-                  this.$parent.getUserList()
-                  //情况表单
-                  this.finishwork()
-              }else{
-                  this.$message.error(res.data.message)
-              }
-          }).catch(error=>{
-              console.log("增加失败")
-              console.log(error)
-          })
-      },
-    confirm() {
+    editUser () {
+      editUserApi(this.form).then(res => {
+        console.log(res)
+        if (res.data.code === 200) {
+          this.$message.success("编辑用户成功");
+          //调用父组件方法刷新列表
+          this.$parent.getUserList()
+          //情况表单
+          this.finishwork()
+        }
+      }).catch(error => {
+        console.log("编辑失败")
+        console.log(error)
+      })
+    },
+    addUser () {
+      window.console.log("开始新增")
+      window.console.log(this.form)
+      addUserApi(this.form).then(res => {
+        console.log(res)
+        if (res.data.code === 200) {
+          this.$message.success("用户创建成功，默认密码为:88888888")
+          //调用父组件方法刷新列表
+          this.$parent.getUserList()
+          //情况表单
+          this.finishwork()
+        } else {
+          this.$message.error(res.data.message)
+        }
+      }).catch(error => {
+        console.log("增加失败")
+        console.log(error)
+      })
+    },
+    confirm () {
       //点击确定先验证表单是否检验通过
       this.$refs.form.validate(valid => {
         if (valid) {
@@ -139,7 +139,7 @@ export default {
           } else {
             //当前为新增模式
             console.log("当前为新增模式");
-            console.log("注册用户信息为:",this.form)
+            console.log("注册用户信息为:", this.form)
             this.addUser()
           }
         } else {
@@ -148,27 +148,27 @@ export default {
         }
       });
     },
-    finishwork() {
+    finishwork () {
       this.$refs.form.resetFields();
-    //   清空form信息
+      //   清空form信息
       // for (const key in this.form) {
       //   this.form[key] = "";
       // }
       this.dialogFormVisible = false;
-      this.imageUrl=" "
+      this.imageUrl = " "
     },
-    cancel() {
+    cancel () {
       //点击取消,清除表单内容
       this.finishwork();
     },
-    handleAvatarSuccess(res, file) {
+    handleAvatarSuccess (res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
-       this.form.avatar = res.data.file_path;
+      this.form.avatar = res.data.file_path;
       //进行单一表单域验证
       this.$refs.form.validateField("avatar");
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg"||"image/png"||"image/gif";
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === "image/jpeg" || "image/png" || "image/gif";
       const isLt2M = file.size / 1024 / 1024 < 2;
 
       if (!isJPG) {
@@ -183,17 +183,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang='less'>
 .Dialog .el-dialog {
   width: 700px;
 }
-.el-dialog{
-    margin-top: 40px!important;
+.el-dialog {
+  margin-top: 40px !important;
 }
 .el-select {
   width: 100%;
 }
-
+.changeedituser {
+  .avatar-uploader {
+    width: 100%;
+    text-align: center;
+  }
+}
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
@@ -217,8 +222,8 @@ export default {
   height: 178px;
   display: block;
 }
-.el-dialog__body{
-    padding-bottom: 0;
-    padding-top: 10px;
+.el-dialog__body {
+  padding-bottom: 0;
+  padding-top: 10px;
 }
 </style>
