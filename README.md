@@ -28,25 +28,25 @@ npm run lint
 
 **登录界面**：
 
-![loginpng](C:\Black horse\VUE-PC端项目\heimamm\showimages\loginpng.png)
+![loginpng](.\showimages\loginpng.png)
 
 **首页**
-![index](C:\Black horse\VUE-PC端项目\heimamm\showimages\index.png)
+![index](.\showimages\index.png)
 
-**科目![subject](C:\Black horse\VUE-PC端项目\heimamm\showimages\subject.png)**
+**科目**![subject](.\showimages\subject.png)
 
 **企业**
-![enterprise](C:\Black horse\VUE-PC端项目\heimamm\showimages\enterprise.png)
+![enterprise](.\showimages\enterprise.png)
 
 **用户管理**
 
-![users](C:\Black horse\VUE-PC端项目\heimamm\showimages\users.png)
+![users](.\showimages\users.png)
 
 **新增用户**
 
-![newuser](C:\Black horse\VUE-PC端项目\heimamm\showimages\newuser.png)
+![newuser](.\showimages\newuser.png)
 
-**修改用户**![edituser](C:\Black horse\VUE-PC端项目\heimamm\showimages\edituser.png)
+**修改用户**![edituser](.\showimages\edituser.png)
 
-**题目列表**![questions](C:\Black horse\VUE-PC端项目\heimamm\showimages\questions.png)
+**题目列表**![questions](.\showimages\questions.png)
 
