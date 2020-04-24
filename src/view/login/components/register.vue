@@ -1,7 +1,13 @@
 <template>
   <el-dialog title="用户注册" :visible.sync="dialogFormVisible" id="registerbox">
     <el-form :model="form" ref="form" :rules="rules">
-      <el-form-item label="头像" prop="headimg" :label-width="formLabelWidth" required>
+      <el-form-item
+        class="registerimg"
+        label="头像"
+        prop="headimg"
+        :label-width="formLabelWidth"
+        required
+      >
         <el-upload
           class="avatar-uploader"
           :action="uploadurl"
@@ -79,7 +85,7 @@ import { phonecheck, emailcheck } from "@/utils/mycheck";
 // };
 import { getCodeApi, apiregister } from "../../../api/register";
 export default {
-  data() {
+  data () {
     return {
       //头像上传地址(接口地址)
       uploadurl: process.env.VUE_APP_URL + "/uploads",
@@ -132,7 +138,7 @@ export default {
     };
   },
   methods: {
-    cancel() {
+    cancel () {
       //点击取消按钮后注册框消失
       this.dialogFormVisible = false;
       //,并清除表单内的内容
@@ -140,7 +146,7 @@ export default {
       //resetFields()方法不会清除上传文件表单域内容
       this.imageUrl = "";
     },
-    handleAvatarSuccess(res, file) {
+    handleAvatarSuccess (res, file) {
       //将文件对象转换为url地址
       this.imageUrl = URL.createObjectURL(file.raw);
       //头像上传成功后将返回的图片地址赋值给headimg进行表单验证
@@ -149,7 +155,7 @@ export default {
       //进行单一表单域验证
       this.$refs.form.validateField("headimg");
     },
-    beforeAvatarUpload(file) {
+    beforeAvatarUpload (file) {
       // 支持png gif jpeg文件格式的上传
       const isJPG = file.type === "image/jpeg" || "image/gif" || "image/png";
       const isLt2M = file.size / 1024 / 1024 < 2;
@@ -161,7 +167,7 @@ export default {
       }
       return isJPG && isLt2M;
     },
-    getcode() {
+    getcode () {
       var reg = /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/;
       if (!reg.test(this.form.phone)) {
         this.$message.error("手机号不合法");
@@ -199,12 +205,12 @@ export default {
           console.log(err);
         });
     },
-    refreshcode() {
+    refreshcode () {
       // this.imgurl=process.env.VUE_APP_URL+"/captcha?type=sendsms"+"&t="+Date.now()
       this.imgurl =
         process.env.VUE_APP_URL + "/captcha?type=sendsms" + "&t=" + Date.now();
     },
-    onSubmit() {
+    onSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
           apiregister({
@@ -246,6 +252,16 @@ export default {
 </script>
 
 <style lang="less">
+.registerimg {
+  .avatar-uploader {
+    width: 100%;
+    text-align: center;
+  }
+  // .avatar-uploader {
+  //   // margin: 0 auto;
+  //   float: left;
+  // }
+}
 .el-dialog__header {
   background-image: linear-gradient(#03c0f9, #1197f9);
   text-align: center;

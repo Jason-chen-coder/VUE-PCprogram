@@ -2,11 +2,11 @@
   <div class="indexbox">
     <el-container class="box">
       <!-- 头部 -->
-      <el-header  class="header">
+      <el-header class="header">
         <div class="left">
           <i class="el-icon-s-fold" @click="isCollapse=!isCollapse"></i>
           <img src="../../assets/indexlogo.png" alt />
-          <span>黑马面面</span>
+          <span>Must Code</span>
         </div>
         <div class="right">
           <img class="usericon" :src="imgUrl" alt />
@@ -18,21 +18,25 @@
         </div>
       </el-header>
       <el-container class="contentbox">
-        <el-aside  style="width:''">
+        <el-aside style="width:''">
           <el-menu
             :router="true"
             default-active="/index/chart"
             class="el-menu-vertical-demo"
             :collapse="isCollapse"
           >
-          <template v-for="(item, index) in child" >
-            <el-menu-item  v-if="item.meta.roles.includes($store.state.role)"  :key="index" :index="item.meta.fullpath">
-              <!-- class  类名使用一个filter来筛选，从而添加图标 -->
-              <i :class="item.meta.icon "></i>
-              <span slot="title">{{item.meta.title}}</span>
-            </el-menu-item>    
-          </template>
-          
+            <template v-for="(item, index) in child">
+              <el-menu-item
+                v-if="item.meta.roles.includes($store.state.role)"
+                :key="index"
+                :index="item.meta.fullpath"
+              >
+                <!-- class  类名使用一个filter来筛选，从而添加图标 -->
+                <i :class="item.meta.icon "></i>
+                <span slot="title">{{item.meta.title}}</span>
+              </el-menu-item>
+            </template>
+
             <!-- <el-menu-item index="/index/user">
               <i class="el-icon-user"></i>
               <span slot="title">用户列表</span>
@@ -47,7 +51,7 @@
             </el-menu-item>
             <el-menu-item index="/index/subject">
               <i class="el-icon-notebook-2"></i>
-              <span slot="title">学科列表</span> -->
+            <span slot="title">学科列表</span>-->
             <!-- </el-menu-item> -->
           </el-menu>
         </el-aside>
@@ -67,18 +71,18 @@ import child from "../../router/childRouter"
 import { logoutApi } from "../../api/index";
 import { removetoken } from "../../utils/mytoken";
 export default {
-  data() {
+  data () {
     return {
       isCollapse: false,
       userinfo: {},
-      imgUrl:this.$store.state.avatar,//将store中保存的用户头像直接赋值
-      child:child
+      imgUrl: this.$store.state.avatar,//将store中保存的用户头像直接赋值
+      child: child
     };
   },
-  mounted() {
+  mounted () {
     //当首页的dom加载完之后直接进行子页面跳转
     this.$router.push("/index/chart")
-    
+
   },
   // created() {
   //   // //进入页面先检查tokn是否为空
@@ -104,7 +108,7 @@ export default {
   //     });
   // },
   methods: {
-    loginOut() {
+    loginOut () {
       this.$confirm("确定要退出吗?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",

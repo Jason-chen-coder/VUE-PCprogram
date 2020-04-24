@@ -3,7 +3,7 @@
     <div class="leftbox">
       <div class="title">
         <img src="../../assets/login-logo.png" alt />
-        <span class="titlename">黑马面面</span>
+        <span class="titlename">Must Code</span>
         <span class="titleline"></span>
         <span class="titlelogin">用户登录</span>
       </div>
@@ -72,9 +72,9 @@ var validatephone = (rule, value, callback) => {
 import register from "./components/register";
 import { loginapi } from "../../api/login";
 import { settoken } from "../../utils/mytoken";
-import {getUserInfo} from "../../api/index"
+import { getUserInfo } from "../../api/index"
 export default {
-  data() {
+  data () {
     return {
       imgcode: process.env.VUE_APP_URL + "/captcha?type=login",
       form: {
@@ -113,14 +113,14 @@ export default {
     register
   },
   methods: {
-    refreshcode() {
+    refreshcode () {
       this.imgcode =
         process.env.VUE_APP_URL + "/captcha?type=login" + Date.now();
     },
-    regist() {
+    regist () {
       this.$refs.register.dialogFormVisible = true;
     },
-    onSubmit() {
+    onSubmit () {
       this.$refs.form.validate(vaid => {
         console.log(vaid); //验证成功为true,失败为false
         if (vaid) {
@@ -140,15 +140,15 @@ export default {
               if (res.data.code == 200) {
                 console.log(res);
                 settoken(res.data.data.token);
-                getUserInfo().then(res=>{
-                  if(res.data.code===200&&res.data.data.status===1){
+                getUserInfo().then(res => {
+                  if (res.data.code === 200 && res.data.data.status === 1) {
                     this.$message.success("登陆成功");
                     this.$router.push("/index");
-                  }else if(res.data.code===200&&res.data.data.status===0){
+                  } else if (res.data.code === 200 && res.data.data.status === 0) {
                     this.$message.error("该用户已被管理员禁用，请联系管理员");
                   }
                 })
-            
+
               } else if (res.data.code == 202) {
                 console.log(res);
                 this.$message.error("登录账号或者密码错误");

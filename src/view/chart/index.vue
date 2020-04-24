@@ -96,11 +96,11 @@ export default {
       });
       this.cityoption.series[0].data = cityvalue;
       this.cityoption.legend.data = cityname;
-      console.log("城市,数量", cityvalue);
+      // console.log("城市,数量", cityvalue);
     });
-    setTimeout(() => {
+    setTimeout(() => { 
       this.drowEnt();
-    }, 1300);
+    }, 2000);
   },
 
   data() {
